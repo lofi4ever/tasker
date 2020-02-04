@@ -15,7 +15,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+body {
+  background-color: rgba($c-bg, .5);
+}
 #app {
   font-family: Verdana, sans-serif;
 }

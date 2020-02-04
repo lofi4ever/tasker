@@ -7,7 +7,7 @@
 
 <style scoped lang="scss">
   h2 {
-    color: blue;
+    color: $c-accent;
     span {
       text-transform: uppercase;
     }
