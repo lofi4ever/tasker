@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <h2>{{name}} <span>here we use SCSS</span></h2>
+    <h2>{{name}} <span>here we use SCSS 1</span></h2>
     <p>{{message}}</p>
   </div>
 </template>
@@ -21,10 +21,15 @@
     // data() {
     //   name: "Test component"
     // }
-    data: () => {
-      return {
-        name: 'test'
-      }
-    }
+    // data: () => {
+    //   return {
+    //     name: 'test'
+    //   }
+    // }
+		data() {
+			return {
+				name: 'another text'
+			}
+		}
   }
 </script>
