@@ -1,26 +1,46 @@
 <template>
   <div id="app">
-    <TestComponent :message="msg"/>
-		<div class="tusk-wrapper">
-			<Tusk v-for="(tusk, index) in tuskList" :name="tusk.name" :text="tusk.text" :key="index"></Tusk>
-		</div>
+    <div class="app-content">
+      <TestComponent :message="msg"/>
+      <div class="task-wrapper">
+        <Task v-for="(task, index) in taskList" :task="task" :key="index" @save="saveTask(index)"></Task>
+        <Task :task="newTask" key="unique" @save="saveTask(null)"></Task>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import TestComponent from './components/TestComponent.vue';
-import Tusk from './components/Tusk.vue';
+import Task from './components/Task.vue';
 
 export default {
   name: 'app',
   components: {
     TestComponent,
-		Tusk
+		Task
+  },
+  methods: {
+    saveTask: function(index) {
+      if(index === null) {
+        this.taskList.push({
+          name: this.newTask.name,
+          text: this.newTask.text
+        });
+        this.newTask.name = "New task";
+        this.newTask.text = "";
+      }
+      console.log(`task ${index} is saved`);
+    }
   },
 	data() {
 		return {
-			msg: 'and another message!',
-			tuskList: [
+      msg: 'and another message!',
+      newTask: {
+        name: "New Task",
+        text: ""
+      },
+			taskList: [
 				{
 					name: 'Tusk 1',
 					text: 'example'
@@ -40,14 +60,33 @@ export default {
 </script>
 
 <style lang="scss">
+* {
+  box-sizing: border-box;
+}
+html, body {
+  padding: 0;
+  margin: 0;
+}
 body {
   background-color: rgba($c-bg, .5);
 }
 #app {
   font-family: Verdana, sans-serif;
 }
-.tusk-wrapper {
-	display: flex;
-	justify-content: space-between;
+.app-content {
+  padding: 0 30px;
+}
+.task-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: -15px;
+  margin-right: -15px;
+  .task {
+    width: 25%;
+    margin: 15px;
+    box-sizing: border-box;
+  }
 }
 </style>
