@@ -35,18 +35,18 @@
           text: '',
           isWaiting: false
         },
-        taskList: [
-          {
-            name: 'task 1',
-            text: 'task 1 description'
-          },
-          {
-            name: 'task 2',
-            text: 'task 2 description'
-          }
-        ]
+        taskList: []
       }
     },
+		created() {
+			fetch('/api/tasks/')
+				.then(response => {
+					return response.json();
+				})
+				.then(data => {
+					this.taskList = data;
+				});
+		},
     methods: {
       updateTask: function(index) {
         this.taskList[index].isWaiting = true;
@@ -57,6 +57,8 @@
       },
       saveTask: function() {
         this.newTask.isWaiting = true;
+				
+
         setTimeout(() => {
           this.taskList.push({
             name: this.newTask.name,
